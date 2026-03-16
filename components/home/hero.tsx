@@ -67,7 +67,7 @@ const HeroSection = React.memo(() => {
     </div>
   );
 
-  const ICON_LINKS = ["github", "linkedin", "instagram", "twitter"] as const;
+  const ICON_LINKS = ["github", "linkedin", "instagram", "leetcode"] as const;
 
   const renderSocialLinks = (): React.ReactNode =>
     ICON_LINKS.map((el) => (
