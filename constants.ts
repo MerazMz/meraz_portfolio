@@ -169,7 +169,7 @@ export const TIMELINE: Array<TimelineNodeV2> = [
     subtitle:
       "Solved 450+ questions on LeetCode covering various topics including arrays, strings, dynamic programming, and more.",
     image: "/social/leetcode.svg",
-    slideImage: "/timeline/questionslc.png",
+    slideImage: "/timeline/questtionslc.png",
     shouldDrawLine: true,
     alignment: Branch.LEFT,
   },
