@@ -20,16 +20,16 @@ const Footer = () => {
       {/* Top border line */}
       <div className="w-full h-px bg-[#676767] opacity-40" />
 
-      <div className="max-w-7xl mx-auto px-8 py-16 flex flex-col items-center gap-12">
+      <div className="max-w-7xl mx-auto px-5 py-10 sm:px-8 sm:py-16 flex flex-col items-center gap-8 sm:gap-12">
 
         <div className="text-center">
           <p className="text-[11px] tracking-widest font-outfit text-[#676767] mb-3">
             AVAILABLE FOR WORK
           </p>
-          <h1 className="text-4xl md:text-5xl font-bold font-outfit text-white leading-tight">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold font-outfit text-white leading-tight">
             Got a project in mind?
           </h1>
-          <p className="text-4xl md:text-5xl font-nyght italic text-[#676767] leading-tight">
+          <p className="text-2xl sm:text-4xl md:text-5xl font-nyght italic text-[#676767] leading-tight">
             Let&apos;s make it happen.
           </p>
         </div>
@@ -55,7 +55,7 @@ const Footer = () => {
         <div className="w-full flex flex-col sm:flex-row justify-between items-center gap-6">
 
           {/* Left: name + credit */}
-          <div>
+          <div className="text-center sm:text-left">
             <p className="font-bold font-outfit text-white text-lg leading-tight">
               Meraj <span className="font-nyght italic text-[#676767]">Haque</span>
             </p>

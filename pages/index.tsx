@@ -79,7 +79,7 @@ export default function Home() {
       <Layout>
         <Header />
         <ProgressIndicator />
-        <Cursor isDesktop={isDesktop} />
+        {/* <Cursor isDesktop={isDesktop} /> */}
         <main className="flex-col flex">
           {renderBackdrop()}
           {/* <HeroSection /> */}
