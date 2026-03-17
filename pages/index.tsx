@@ -75,6 +75,7 @@ export default function Home() {
     <>
       <Head>
         <title>{METADATA.title}</title>
+        <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: light)" />
       </Head>
       <Layout>
         <Header />
