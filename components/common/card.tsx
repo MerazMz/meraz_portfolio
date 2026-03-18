@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import photo1 from "../../public/photo1.jpeg";
 import photo2 from "../../public/photo2.jpeg";
 import photo3 from "../../public/photo3.jpeg";
@@ -47,23 +48,11 @@ const socialLinks: SocialLink[] = [
 
 const images = [photo1, photo2, photo3];
 
-// Keyframes injected once — snappy tick like a clock second hand
-const tickStyles = `
-@keyframes tickIn {
-    0%   { transform: translateX(55px); opacity: 0; }
-    45%  { transform: translateX(-5px); opacity: 1; }
-    65%  { transform: translateX(2px); }
-    100% { transform: translateX(0px); }
-}
-.tick-in {
-    animation: tickIn 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-`;
+
 
 const PortfolioCard: React.FC = () => {
     const [currentTime, setCurrentTime] = useState("");
     const [activeIndex, setActiveIndex] = useState(0);
-    const [tick, setTick] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
 
     // Clock
@@ -84,7 +73,6 @@ const PortfolioCard: React.FC = () => {
         if (isHovered) return; // Pause slideshow on hover
         const interval = setInterval(() => {
             setActiveIndex((prev) => (prev + 1) % images.length);
-            setTick((t) => t + 1);
         }, 3000);
         return () => clearInterval(interval);
     }, [isHovered]);
@@ -94,7 +82,6 @@ const PortfolioCard: React.FC = () => {
 
     return (
         <>
-            <style>{tickStyles}</style>
             <div
                 className="w-full h-full bg-neutral-900 border-[#676767] border hover:border-gray-300 transition-all duration-300 cursor-pointer rounded-3xl shadow-xl text-neutral-100 flex flex-col p-6"
                 onMouseEnter={() => setIsHovered(true)}
@@ -116,35 +103,70 @@ const PortfolioCard: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Images — tick slideshow */}
-                <div className="flex items-center justify-center gap-3 flex-grow overflow-hidden">
+                {/* Images — 3D Curved Arc Carousel using Framer Motion */}
+                {/* Adding perspective to the container so rotateY works beautifully */}
+                <div className="relative w-full flex-grow flex items-center justify-center overflow-hidden h-[160px] mt-4" style={{ perspective: "1000px" }}>
+                    <AnimatePresence mode="popLayout">
+                        {images.map((img, idx) => {
+                            // Calculate relative position based on the active index
+                            let diff = idx - activeIndex;
 
-                    {/* Left — prev */}
-                    <div
-                        key={`left-${tick}`}
-                        className="tick-in w-1/4 aspect-[3/4] rounded-lg overflow-hidden flex-shrink-0"
-                        style={{ opacity: 0.55 }}
-                    >
-                        <img src={images[prev].src} className="w-full h-full object-cover" />
-                    </div>
+                            // Handle circular array mapping so it infinitely loops left/right
+                            if (diff < -1) diff += images.length;
+                            if (diff > 1) diff -= images.length;
 
-                    {/* Center — active */}
-                    <div
-                        key={`center-${tick}`}
-                        className="tick-in w-1/2 aspect-[3/4] rounded-xl overflow-hidden flex-shrink-0"
-                    >
-                        <img src={images[activeIndex].src} className="w-full h-full object-cover" />
-                    </div>
+                            // Render only the active, immediate previous, and immediate next
+                            if (Math.abs(diff) > 1) return null;
 
-                    {/* Right — next */}
-                    <div
-                        key={`right-${tick}`}
-                        className="tick-in w-1/4 aspect-[3/4] rounded-lg overflow-hidden flex-shrink-0"
-                        style={{ opacity: 0.55 }}
-                    >
-                        <img src={images[next].src} className="w-full h-full object-cover" />
-                    </div>
+                            // Is this the currently focused image?
+                            const isActive = diff === 0;
 
+                            return (
+                                <motion.div
+                                    key={img.src}
+                                    layout
+                                    initial={{ 
+                                        opacity: 0, 
+                                        scale: 0.8, 
+                                        x: 100, 
+                                        y: 20, 
+                                        rotateY: -20, 
+                                        rotateZ: -5 
+                                    }}
+                                    animate={{
+                                        opacity: isActive ? 1 : 0.6,
+                                        scale: isActive ? 1 : 0.85,
+                                        // Push left/right further, and calculate rotation
+                                        x: isActive ? 0 : diff === -1 ? -110 : 110,
+                                        // Add subtle Y drop
+                                        y: isActive ? 0 : 25,
+                                        // INWARD ROTATION: Left image rotates +25deg (looks inward), Right rotates -25deg
+                                        rotateY: isActive ? 0 : diff === -1 ? 25 : -25,
+                                        // Slight tilt outward
+                                        rotateZ: isActive ? 0 : diff === -1 ? -5 : 5,
+                                        zIndex: isActive ? 30 : 10,
+                                    }}
+                                    exit={{ 
+                                        opacity: 0, 
+                                        scale: 0.8, 
+                                        x: -100, 
+                                        y: 20,
+                                        rotateY: 20, 
+                                        rotateZ: 5 
+                                    }}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 80,
+                                        damping: 15,
+                                        mass: 0.8,
+                                    }}
+                                    className={`absolute w-1/2 md:w-[45%] aspect-[3/4] rounded-xl overflow-hidden shadow-lg`}
+                                >
+                                    <img src={img.src} alt="" className="w-full h-full object-cover" />
+                                </motion.div>
+                            );
+                        })}
+                    </AnimatePresence>
                 </div>
 
                 {/* Dot indicators */}

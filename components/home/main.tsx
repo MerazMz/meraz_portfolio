@@ -36,7 +36,7 @@ export default function GridLayout() {
             </div>
 
             {/* ── DESKTOP LAYOUT (hidden below lg) ── */}
-            <div className="relative hidden lg:grid grid-cols-7 grid-rows-11 gap-2 h-screen p-4">
+            <div className="relative hidden lg:grid grid-cols-7 grid-rows-11 gap-2 xl:gap-3 2xl:gap-4 h-screen p-4 xl:p-5 2xl:p-6">
 
                 {/* Card1 */}
                 <div className="col-span-2 row-span-3 flex justify-center">
@@ -72,15 +72,15 @@ export default function GridLayout() {
                 </div>
 
                 {/* CLOCK OVERLAY */}
-                <div className="absolute left-1/2 top-[62%] -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
+                <div className="absolute left-1/2 top-[62%] xl:top-[63%] -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
 
                     {/* Inner Ring */}
-                    <div className="absolute w-[480px] h-[480px] rounded-full bg-[#1a1a1a] border border-[#676767]"
+                    <div className="absolute w-[407px] h-[407px] xl:w-[447px] xl:h-[447px] 2xl:w-[487px] 2xl:h-[487px] rounded-full bg-[#1a1a1a] border border-[#676767]"
                         style={{ clipPath: "inset(0 0% 13% 0%)" }}
                     />
 
                     {/* Clock */}
-                    <div className="scale-[1.35] hover:scale-[1.4] transition-all duration-300 relative z-30">
+                    <div className="scale-[1.12] xl:scale-[1.22] 2xl:scale-[1.32] hover:scale-[1.15] xl:hover:scale-[1.25] 2xl:hover:scale-[1.35] transition-all duration-300 relative z-30">
                         <AnalogClock running={true} smooth={true} />
                     </div>
 

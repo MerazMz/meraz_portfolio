@@ -80,7 +80,7 @@ export const PROJECTS: IProject[] = [
     gradient: ["#245B57", "#004741"],
     url: "https://umz.vercel.app/",
     githubUrl: "https://github.com/MerazMz/umzV3.0",
-    tech: ["nodejs", "express", "tailwind", "react"],
+    tech: ["react", "express", "tailwind", "nodejs"],
   },
   {
     name: "MediBot",
