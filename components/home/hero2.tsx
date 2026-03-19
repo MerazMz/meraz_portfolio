@@ -1,6 +1,32 @@
 import { motion } from "framer-motion";
+import { useEffect } from "react";
+
+// Returns a stable UUID stored in localStorage (created once per browser)
+function getOrCreateVisitorId(): string {
+    try {
+        const KEY = "portfolio_vid";
+        let id = localStorage.getItem(KEY);
+        if (!id) {
+            id = crypto.randomUUID();
+            localStorage.setItem(KEY, id);
+        }
+        return id;
+    } catch {
+        return crypto.randomUUID();
+    }
+}
 
 const Hero2 = () => {
+    // Register this visitor on mount (POST with stable fingerprint)
+    useEffect(() => {
+        const visitorId = getOrCreateVisitorId();
+        fetch("/api/visitors", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ visitorId }),
+        }).catch(() => {});
+    }, []);
+
     // Shared animation props for slide-up effect
     const fadeUpVariants = {
         hidden: { opacity: 0, y: 30 },
@@ -108,6 +134,7 @@ const Hero2 = () => {
             </motion.div>
 
         </section>
+
     );
 };
 

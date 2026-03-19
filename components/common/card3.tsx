@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import confetti from "canvas-confetti";
 
 const Card3: React.FC = () => {
     const email = "hello@meraz.me";
     const [copied, setCopied] = useState(false);
+    const [visitorCount, setVisitorCount] = useState<number | null>(null);
+
+    useEffect(() => {
+        fetch("/api/visitors")
+            .then((r) => r.json())
+            .then((data) => {
+                if (typeof data.count === "number") setVisitorCount(data.count);
+            })
+            .catch(() => {});
+    }, []);
 
     const copyEmail = (e: React.MouseEvent<HTMLParagraphElement>) => {
         navigator.clipboard.writeText(email);
@@ -30,8 +40,10 @@ const Card3: React.FC = () => {
             {/* Top */}
             <div className="flex justify-between items-center">
 
-                <div className="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center">
-                    <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                <div className="min-w-[2rem] h-8 px-1.5 rounded-full border border-neutral-700 flex items-center justify-center" title="Unique visitors">
+                    <span className="text-[10px] font-semibold font-nyght text-neutral-300 tabular-nums leading-none">
+                        {visitorCount !== null ? visitorCount.toLocaleString() : "·"}
+                    </span>
                 </div>
 
                 <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-700 text-xs text-neutral-300 font-outfit ">
