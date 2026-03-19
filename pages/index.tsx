@@ -7,6 +7,7 @@
 import { METADATA } from "../constants";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
+import { Analytics } from "@vercel/analytics/next"
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -97,6 +98,7 @@ export default function Home() {
         </main>
         {/* <Scripts /> */}
       </Layout>
+      <Analytics />
     </>
   );
 }
