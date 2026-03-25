@@ -1,9 +1,3 @@
-// Copyright Ayush Singh 2021,2022. All Rights Reserved.
-// Project: folio
-// Author contact: https://www.linkedin.com/in/alphaayush/
-// This file is licensed under the MIT License.
-// License text available at https://opensource.org/licenses/MIT
-
 import { gsap, Linear } from "gsap";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -68,15 +62,13 @@ const AboutSection = () => {
         className={`about-1 leading-tight ${willChange ? "will-change-opacity" : ""
           }`}
       >
-        I am a passionate <span className="text-[#2f9cb8] font-nyght italic">Full Stack Engineer</span> who bridges the gap between development
-        and design.{" "}
+        Not everything needs to make sense at first. I just follow the <span className="text-[#2f9cb8] font-nyght italic">pattern</span> and build until it clicks.
       </span>
       <span
         className={`about-2 leading-tight ${willChange ? "will-change-opacity" : ""
           }`}
-      >
-        I take responsibility to craft a good <span className="text-[#2f9cb8] font-nyght italic">user experience</span> using modern
-        frontend architecture.
+      ><br />
+        Somewhere between trial, error, and instinct, things turn into{" "}<span className="text-[#2f9cb8] font-nyght italic">experiences </span>you don’t question
       </span>
     </h1>
   );
