@@ -117,6 +117,7 @@ const SkillsSection = () => {
                   width={24}
                   height={24}
                   objectFit="contain"
+                  unoptimized
                 />
               </div>
               <span className="text-[8px] font-outfit text-gray-400 tracking-wide uppercase group-hover:text-[#aaa] transition-colors duration-200 text-center leading-tight">

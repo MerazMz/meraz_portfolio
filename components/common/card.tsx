@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import photo1 from "../../public/photo1.jpeg";
 import photo2 from "../../public/photo2.jpeg";
-import photo3 from "../../public/photo3.jpeg";
+import photo3 from "../../public/photo3.jpg";
 
 interface SocialLink {
     icon: JSX.Element;
@@ -125,13 +125,13 @@ const PortfolioCard: React.FC = () => {
                                 <motion.div
                                     key={img.src}
                                     layout
-                                    initial={{ 
-                                        opacity: 0, 
-                                        scale: 0.8, 
-                                        x: 100, 
-                                        y: 20, 
-                                        rotateY: -20, 
-                                        rotateZ: -5 
+                                    initial={{
+                                        opacity: 0,
+                                        scale: 0.8,
+                                        x: 100,
+                                        y: 20,
+                                        rotateY: -20,
+                                        rotateZ: -5
                                     }}
                                     animate={{
                                         opacity: isActive ? 1 : 0.6,
@@ -146,13 +146,13 @@ const PortfolioCard: React.FC = () => {
                                         rotateZ: isActive ? 0 : diff === -1 ? -5 : 5,
                                         zIndex: isActive ? 30 : 10,
                                     }}
-                                    exit={{ 
-                                        opacity: 0, 
-                                        scale: 0.8, 
-                                        x: -100, 
+                                    exit={{
+                                        opacity: 0,
+                                        scale: 0.8,
+                                        x: -100,
                                         y: 20,
-                                        rotateY: 20, 
-                                        rotateZ: 5 
+                                        rotateY: 20,
+                                        rotateZ: 5
                                     }}
                                     transition={{
                                         type: "spring",
